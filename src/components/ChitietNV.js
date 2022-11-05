@@ -9,7 +9,9 @@ import {
   CardBody,
   CardText,
 } from "reactstrap";
-function RenderNv({ Mvien }) {
+import { Loading } from "./LoadingComponent";
+
+function RenderNv({ Mvien, kq }) {
   return (
     <div className="row">
       <div className="col-md-3  col-sm-4  col-12 ">
@@ -25,7 +27,7 @@ function RenderNv({ Mvien }) {
             <CardText>
               Ngày vào công ty : {dateFormat(Mvien.doB, "dd/mm/yyyy")}
             </CardText>
-            <CardText>Phòng ban : {Mvien.department.name}</CardText>
+            <CardText>Phòng ban : {kq}</CardText>
             <CardText>Số ngày nghỉ còn lại : {Mvien.annualLeave}</CardText>
             <CardText> Số ngày đã làm thêm : {Mvien.overTime}</CardText>
           </CardBody>
@@ -35,7 +37,18 @@ function RenderNv({ Mvien }) {
   );
 }
 const Ndetail = (props) => {
-  if (props.Mvien != null) {
+  var kq = props.department.filter((n) => n.id === props.Mvien.departmentId)[0];
+
+  if (typeof kq !== "undefined") {
+    kq = kq.name;
+  } else {
+    kq = "";
+  }
+  if (props.isLoading) {
+    return <Loading />;
+  } else if (props.errMess) {
+    return <div>{props.errMess}</div>;
+  } else if (props.Mvien != null) {
     return (
       <div className="container">
         <div className="row">
@@ -51,7 +64,7 @@ const Ndetail = (props) => {
           </div>
         </div>
 
-        <RenderNv Mvien={props.Mvien} />
+        <RenderNv Mvien={props.Mvien} kq={kq} />
         <br />
       </div>
     );

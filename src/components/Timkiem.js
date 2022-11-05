@@ -12,12 +12,11 @@ import {
   Input,
   FormFeedback,
 } from "reactstrap";
-import { STAFFS } from "../shared/staffs";
+
 class Timkiem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lisT: STAFFS,
       fname: "",
       touched: {
         fname: false,
@@ -28,6 +27,7 @@ class Timkiem extends Component {
     this.hanledBlur = this.hanledBlur.bind(this);
     // this.FindNhanvien = this.FindNhanvien.bind(this);
   }
+
   hanledBlur = (field) => (evt) => {
     this.setState({
       touched: { ...this.state, [field]: true },
@@ -58,7 +58,7 @@ class Timkiem extends Component {
   }
   FindNhanvien() {
     if (this.state.fname !== "") {
-      let a = this.state.lisT.filter(
+      let a = this.props.nvien.filter(
         (nvien) =>
           nvien.name.toLowerCase().indexOf(this.state.fname.toLowerCase()) !==
           -1
@@ -73,7 +73,7 @@ class Timkiem extends Component {
                 <CardText>
                   Ngày vào công ty : {dateFormat(Tvien.doB, "dd/mm/yyyy")}
                 </CardText>
-                <CardText>Phòng ban : {Tvien.department.name}</CardText>
+                <CardText>Phòng ban : {Tvien.departmentId}</CardText>
                 <CardText>Số ngày nghỉ còn lại : {Tvien.annualLeave}</CardText>
                 <CardText> Số ngày đã làm thêm : {Tvien.overTime}</CardText>
               </CardBody>

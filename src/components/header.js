@@ -13,6 +13,7 @@ import {
   Label,
   Form,
   FormGroup,
+  Button,
 } from "reactstrap";
 
 import Modal from "react-modal";
@@ -90,16 +91,17 @@ class Header extends Component {
                   </NavItem>
                   <NavItem>
                     <NavLink className="nav-Link" to="/them">
-                      <span className="fa fa-plus"></span>Thêm nhân viên
+                      <span className="fa fa-superpowers"></span>Quản lý nhân
+                      viên
                     </NavLink>
                   </NavItem>
                 </HashRouter>
               </Nav>
               <Nav className="ml" navbar>
                 <NavItem>
-                  <button className="btt" onClick={this.toggleModal}>
+                  <Button className="btt" onClick={this.toggleModal}>
                     <span className="fa fa-sign-in fa-lg"></span> Login
-                  </button>
+                  </Button>
                 </NavItem>
               </Nav>
             </Collapse>
@@ -137,9 +139,9 @@ class Header extends Component {
                   Remember me
                 </Label>
               </FormGroup>
-              <button type="submit" value="submit" color="primary">
+              <Button type="submit" value="submit" color="primary">
                 Login
-              </button>
+              </Button>
             </Form>
           </ModalBody>
         </Modal>
